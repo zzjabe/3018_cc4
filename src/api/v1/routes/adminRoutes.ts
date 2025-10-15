@@ -2,16 +2,14 @@ import express, { Router } from "express";
 import { getUserProfile, deleteUser } from "../controllers/userController";
 import authenticate from "../middleware/authenticate";
 import isAuthorized from "../middleware/authorize";
-
+import { getUserDetails, setCustomClaims } from "../controllers/adminController";
 
 const router: Router = express.Router();
 
 
-/** Route to get the user's profile - requires authentication */
-router.get("/profile", authenticate, getUserProfile);
+router.get("/:uid", authenticate, isAuthorized({ hasRole: ["admin"]}), getUserDetails);
 
-/** Route to delete a user - requires authentication and admin role */
-router.delete("/:id", authenticate, isAuthorized({ hasRole: ["admin"]}), deleteUser);
+router.post("/setCustomClaims", authenticate, isAuthorized({ hasRole: ["admin"]}), setCustomClaims);
 
 
 
