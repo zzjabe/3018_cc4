@@ -11,8 +11,8 @@ const router: Router = express.Router();
 router.get("/profile", authenticate, getUserProfile);
 
 /** Route to delete a user - requires authentication and admin role */
-router.delete("/:id", authenticate, isAuthorized({ hasRole: ["admin"]}), deleteUser);
 
+router.delete("/:id", authenticate, deleteUser);
 
 
 export default router;
