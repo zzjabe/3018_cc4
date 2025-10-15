@@ -6,8 +6,6 @@ import { getUserDetails, setCustomClaims } from "../controllers/adminController"
 
 const router: Router = express.Router();
 
-router.post("/admin/", isAuthorized);
-
-router.post("/admin/setCustomClaims", isAuthorized, setCustomClaims)
+router.post("/setCustomClaims", authenticate, setCustomClaims)
 
 export default router;
